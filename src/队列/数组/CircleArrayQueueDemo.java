@@ -52,7 +52,7 @@ class CircleArrayQueue {
         }
         //直接将数据加入
         arr[rear] = num;
-        //将rear后移，这里考虑取余
+        //将rear后移，这里考虑取余, 是为了保证rear<maxSize
         rear = (rear + 1) % maxSize;
     }
 
@@ -90,4 +90,63 @@ class CircleArrayQueue {
         }
         return arr[front];
     }
+}
+
+class CircleQueueV2 {
+
+    private int maxSize;
+
+    private int front;
+
+    private int rear;
+
+    private int[] arr;
+
+    public CircleQueueV2(int maxSize) {
+        this.maxSize = maxSize + 1;
+        this.front = 0;
+        this.rear = 0;
+        arr = new int[this.maxSize];
+    }
+
+    public int size() {
+        return (rear - front + maxSize) % maxSize;
+    }
+
+    public boolean isFull() {
+        return (rear + 1) % maxSize == front;
+    }
+
+    public boolean isEmpty() {
+        return front == rear;
+    }
+
+    public void addQueue(int num) {
+        if (isFull()) {
+            System.out.println("队列已满");
+            return;
+        }
+        arr[rear] = num;
+        rear = (rear + 1) % maxSize;
+    }
+
+    public Integer getQueue() {
+        if (isEmpty()) {
+            return null;
+        }
+        int temp = arr[front];
+        front = (front + 1) % maxSize;
+        return temp;
+    }
+
+    public void list() {
+        if (isEmpty()) {
+            System.out.println("队列中无数据");
+        }
+        for (int i = front; i < front + size(); i++) {
+            System.out.printf(arr[i % maxSize] + "\t");
+        }
+        System.out.println();
+    }
+
 }
