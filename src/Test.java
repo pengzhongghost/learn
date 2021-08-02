@@ -1,78 +1,55 @@
 
 public class Test {
     public static void main(String[] args) {
-        MyLinkedQueueV2 queue = new MyLinkedQueueV2();
-//        queue.addQueue(new HeroNode(1, "宋江", "豹子头"));
-//        queue.addQueue(new HeroNode(3, "李逵", "大刀"));
-//        queue.addQueue(new HeroNode(2, "吕布", "奉先"));
-//        queue.showQueue();
-//        System.out.println(queue.getQueue());
-//        System.out.println(queue.getQueue());
-//        System.out.println(queue.getQueue());
-//        System.out.println(queue.getQueue());
-//        queue.addQueue(new HeroNode(1, "宋江", "豹子头"));
-//        queue.showQueue();
-        queue.addByOrder(new HeroNodeV2(1, "宋江", "豹子头"));
-        queue.addByOrder(new HeroNodeV2(3, "李逵", "大刀"));
-        queue.addByOrder(new HeroNodeV2(2, "吕布", "奉先"));
+        SingleQueue<String> queue = new SingleQueue<>();
+        queue.addQueue("刘备");
+        queue.addQueue("关羽");
+        queue.addQueue("张飞");
         queue.showQueue();
-
+        System.out.println(queue.getQueue());
+        System.out.println(queue.getQueue());
+        System.out.println(queue.getQueue());
+        System.out.println(queue.getQueue());
+        queue.showQueue();
+        SingleQueue<Integer> queue02 = new SingleQueue<>();
+        queue02.addQueue(1);
+        queue02.addQueue(2);
+        queue02.addQueue(3);
+        queue02.showQueue();
     }
 }
 
-class MyLinkedQueueV2 {
+class SingleQueue<T> {
 
-    private HeroNodeV2 head = new HeroNodeV2(0, null, null);
+    private Node head = new Node(0, null, null);
 
-    public void addQueue(HeroNodeV2 node) {
-        HeroNodeV2 temp = head;
-        while (null != temp) {
-            if (null == temp.next) {
-                temp.next = node;
-                return;
-            }
+    public void addQueue(T data) {
+        Node temp = head;
+        while (null != temp.next) {
             temp = temp.next;
         }
+        int id = temp.id;
+        id++;
+        temp.next = new Node(id, data, null);
     }
 
-    //只需要和temp.next比较，只要比他大，就在他的前面插入此节点,否则继续便利
-    public void addByOrder(HeroNodeV2 node) {
-        HeroNodeV2 temp = head;
-        while (true) {
-            //temp.next为null，可以插入数据
-            if (temp.next == null) {
-                break;
-            }
-            //temp.next的id>当前node的id
-            if (temp.next.id > node.id) {
-                break;
-            } else if (temp.next.id == node.id) {
-                System.out.println("此编号已经存在" + node);
-                return;
-            }
-            temp = temp.next;
-        }
-        node.next = temp.next;
-        temp.next = node;
-    }
-
-    public HeroNodeV2 getQueue() {
-        if (null != head.next) {
-            HeroNodeV2 temp = head.next;
-            head.next = head.next.next;
-            return temp;
+    public Object getQueue() {
+        while (null != head.next) {
+            Object data = head.next.data;
+            head = head.next;
+            return data;
         }
         return null;
     }
 
     public void showQueue() {
-        HeroNodeV2 temp = head;
-        if (null == temp.next) {
+        Node temp = head.next;
+        if (null == temp) {
             System.out.println("队列为空");
             return;
         }
-        while (null != temp.next) {
-            System.out.printf(temp.next + "\t");
+        while (null != temp) {
+            System.out.printf(temp.data + "\t");
             temp = temp.next;
         }
         System.out.println();
@@ -80,28 +57,17 @@ class MyLinkedQueueV2 {
 
 }
 
-class HeroNodeV2 {
+class Node<T> {
 
     public int id;
 
-    public String name;
+    public T data;
 
-    public String nickName;
+    public Node next;
 
-    public HeroNodeV2 next;
-
-    public HeroNodeV2(int id, String name, String nickName) {
+    public Node(int id, T data, Node next) {
         this.id = id;
-        this.name = name;
-        this.nickName = nickName;
-    }
-
-    @Override
-    public String toString() {
-        return "HeroNode{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", nickName='" + nickName + '\'' +
-                '}';
+        this.data = data;
+        this.next = next;
     }
 }

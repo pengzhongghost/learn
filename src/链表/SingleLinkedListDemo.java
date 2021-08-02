@@ -1,4 +1,4 @@
-package 队列.链表;
+package 链表;
 
 public class SingleLinkedListDemo {
     public static void main(String[] args) {
@@ -241,6 +241,22 @@ class MyLinkedQueueV2 {
         }
         System.out.println();
     }
+
+    //获取有效节点的个数
+    public Integer getLength() {
+        HeroNodeV2 temp = head.next;
+        if (null == temp) {
+            return 0;
+        }
+        int length = 0;
+        while (null != temp) {
+            length++;
+            temp = temp.next;
+        }
+        return length;
+    }
+
+
 
 }
 
