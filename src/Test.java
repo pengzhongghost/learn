@@ -1,73 +1,78 @@
 
 public class Test {
     public static void main(String[] args) {
-        SingleQueue<String> queue = new SingleQueue<>();
-        queue.addQueue("刘备");
-        queue.addQueue("关羽");
-        queue.addQueue("张飞");
-        queue.showQueue();
-        System.out.println(queue.getQueue());
-        System.out.println(queue.getQueue());
-        System.out.println(queue.getQueue());
-        System.out.println(queue.getQueue());
-        queue.showQueue();
-        SingleQueue<Integer> queue02 = new SingleQueue<>();
-        queue02.addQueue(1);
-        queue02.addQueue(2);
-        queue02.addQueue(3);
-        queue02.showQueue();
+        CircleLinkedList list = new CircleLinkedList();
+        list.add(5);
+        list.josefu(1,2,5);
+
     }
 }
 
-class SingleQueue<T> {
 
-    private Node head = new Node(0, null, null);
+class CircleLinkedList {
 
-    public void addQueue(T data) {
-        Node temp = head;
-        while (null != temp.next) {
-            temp = temp.next;
-        }
-        int id = temp.id;
-        id++;
-        temp.next = new Node(id, data, null);
-    }
+    private Node head = null;
 
-    public Object getQueue() {
-        while (null != head.next) {
-            Object data = head.next.data;
-            head = head.next;
-            return data;
-        }
-        return null;
-    }
-
-    public void showQueue() {
-        Node temp = head.next;
-        if (null == temp) {
-            System.out.println("队列为空");
+    public void add(int nums) {
+        if (nums < 1) {
             return;
         }
-        while (null != temp) {
-            System.out.printf(temp.data + "\t");
-            temp = temp.next;
+        Node cur = null;
+        for (int i = 1; i <= nums; i++) {
+            Node node = new Node(i);
+            if (i == 1) {
+                head = node;
+                head.next = head;
+                cur = head;
+            } else {
+                cur.next = node;
+                node.next = head;
+                cur = cur.next;
+            }
         }
-        System.out.println();
+    }
+
+    public void josefu(int startNum, int startCount, int count) {
+        if (null == head) {
+            System.out.println("链表为空");
+            return;
+        }
+        Node helper = this.head;
+        while (true) {
+            if (helper.next == head) {
+                break;
+            }
+            helper = helper.next;
+        }
+        for (int i = 0; i < startNum - 1; i++) {
+            helper = helper.next;
+            head = head.next;
+        }
+        while (true){
+            if (head==helper){
+                System.out.println(helper.id);
+                break;
+            }
+            for (int i = 0; i < startCount - 1; i++) {
+                head = head.next;
+                helper = helper.next;
+            }
+            System.out.println(head.id);
+            head = head.next;
+            helper.next = head;
+        }
+
     }
 
 }
 
-class Node<T> {
+class Node {
 
     public int id;
 
-    public T data;
-
     public Node next;
 
-    public Node(int id, T data, Node next) {
+    public Node(int id) {
         this.id = id;
-        this.data = data;
-        this.next = next;
     }
 }
