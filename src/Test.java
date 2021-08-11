@@ -1,78 +1,48 @@
 
 public class Test {
     public static void main(String[] args) {
-        CircleLinkedList list = new CircleLinkedList();
-        list.add(5);
-        list.josefu(1,2,5);
-
+        Test test = new Test();
+        test.check(0);
+        System.out.println(checkCount);
+        System.out.println(judge);
     }
-}
 
+    int[] arr = new int[8];
 
-class CircleLinkedList {
+    static int checkCount = 0;
 
-    private Node head = null;
+    static int judge = 0;
 
-    public void add(int nums) {
-        if (nums < 1) {
+    public void check(int n) {
+        if (n == 8) {
+            checkCount++;
+            list();
             return;
         }
-        Node cur = null;
-        for (int i = 1; i <= nums; i++) {
-            Node node = new Node(i);
-            if (i == 1) {
-                head = node;
-                head.next = head;
-                cur = head;
-            } else {
-                cur.next = node;
-                node.next = head;
-                cur = cur.next;
+        for (int i = 0; i < 8; i++) {
+            arr[n] = i;
+            if (isOk(n)) {
+                check(n + 1);
             }
         }
     }
 
-    public void josefu(int startNum, int startCount, int count) {
-        if (null == head) {
-            System.out.println("链表为空");
-            return;
-        }
-        Node helper = this.head;
-        while (true) {
-            if (helper.next == head) {
-                break;
+    public boolean isOk(int n) {
+        judge++;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == arr[n] || Math.abs(i - n) == Math.abs(arr[i] - arr[n])) {
+                return false;
             }
-            helper = helper.next;
         }
-        for (int i = 0; i < startNum - 1; i++) {
-            helper = helper.next;
-            head = head.next;
-        }
-        while (true){
-            if (head==helper){
-                System.out.println(helper.id);
-                break;
-            }
-            for (int i = 0; i < startCount - 1; i++) {
-                head = head.next;
-                helper = helper.next;
-            }
-            System.out.println(head.id);
-            head = head.next;
-            helper.next = head;
-        }
-
+        return true;
     }
 
-}
-
-class Node {
-
-    public int id;
-
-    public Node next;
-
-    public Node(int id) {
-        this.id = id;
+    public void list() {
+        for (int i : arr) {
+            System.out.printf(i + "\t");
+        }
+        System.out.println();
     }
+
+
 }
