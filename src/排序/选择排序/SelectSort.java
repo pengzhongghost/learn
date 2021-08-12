@@ -22,9 +22,11 @@ public class SelectSort {
 
     //选择排序都时间复杂度是O(n^2)
     public static void sort(int[] arr) {
+        int minIndex = 0;
+        int temp = 0;
         for (int i = 0; i < arr.length; i++) {
-            int minIndex = i;
-            int temp = arr[i];
+            minIndex = i;
+            temp = arr[i];
             for (int j = i; j < arr.length; j++) {
                 if (arr[j] < temp) {
                     temp = arr[j];

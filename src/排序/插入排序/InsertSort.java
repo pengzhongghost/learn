@@ -20,9 +20,11 @@ public class InsertSort {
     }
 
     public static void sort(int[] arr) {
+        int insertValue = 0;
+        int beforeIndex = 0;
         for (int i = 1; i < arr.length; i++) {
-            int insertValue = arr[i];
-            int beforeIndex = i - 1;
+            insertValue = arr[i];
+            beforeIndex = i - 1;
             while (beforeIndex >= 0 && insertValue < arr[beforeIndex]) {
                 arr[beforeIndex + 1] = arr[beforeIndex];
                 beforeIndex--;
