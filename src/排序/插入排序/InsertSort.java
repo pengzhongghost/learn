@@ -27,7 +27,10 @@ public class InsertSort {
                 arr[beforeIndex + 1] = arr[beforeIndex];
                 beforeIndex--;
             }
-            arr[beforeIndex + 1] = insertValue;
+            //优化，找到的就是当前位置
+            if (beforeIndex + 1 != i) {
+                arr[beforeIndex + 1] = insertValue;
+            }
         }
     }
 
