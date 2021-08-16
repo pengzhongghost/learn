@@ -7,6 +7,16 @@ public class RadixSort {
         int[] arr = {53, 3, 542, 748, 14, 214};
         sort(arr);
         System.out.println(Arrays.toString(arr));
+        //测试8万条数据都排序时间
+        int[] test = new int[8000000];
+        for (int i = 0; i < 8000000; i++) {
+            test[i] = (int) (Math.random() * 8000000);
+        }
+        //System.out.println(Arrays.toString(test));
+        long start = System.currentTimeMillis();
+        sort(test);
+        long end = System.currentTimeMillis();
+        System.out.println("耗费时间：" + (end - start));
     }
 
     public static void sort(int[] arr) {
