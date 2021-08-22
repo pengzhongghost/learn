@@ -8,13 +8,18 @@ public class BinaryTreeDemo {
         HeroNode node02 = new HeroNode(2, "吴用");
         HeroNode node03 = new HeroNode(3, "卢俊义");
         HeroNode node04 = new HeroNode(4, "林冲");
+        HeroNode node05 = new HeroNode(5, "关胜");
         tree.setRoot(root);
         root.left = node02;
         root.right = node03;
         node03.right = node04;
+        node03.left = node05;
         //遍历二叉式 前序 中序 后序
+        System.out.println("前序");
         tree.preOrder();
+        System.out.println("中序");
         tree.infixOrder();
+        System.out.println("后序");
         tree.postOrder();
 
     }
