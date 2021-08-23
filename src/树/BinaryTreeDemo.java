@@ -21,7 +21,13 @@ public class BinaryTreeDemo {
         tree.infixOrder();
         System.out.println("后序");
         tree.postOrder();
-
+        System.out.println("=========查找========");
+        System.out.println(tree.preSeatrch(5));
+        System.out.println(tree.indixSearch(5));
+        System.out.println(tree.postSearch(5));
+        System.out.println("=========删除========");
+        tree.delNode(1);
+        tree.preOrder();
     }
 }
 
@@ -56,6 +62,44 @@ class BinaryTree {
             this.root.postOrder();
         } else {
             System.out.println("二叉树为空，无法遍历");
+        }
+    }
+
+    //前序查找
+    public HeroNode preSeatrch(int no) {
+        if (null != root) {
+            return this.root.preSearch(no);
+        } else {
+            return null;
+        }
+    }
+
+    //中序查找
+    public HeroNode indixSearch(int no) {
+        if (null != root) {
+            return this.root.infixSearch(no);
+        } else {
+            return null;
+        }
+    }
+
+    //后续查找
+    public HeroNode postSearch(int no) {
+        if (null != root) {
+            return this.root.postSearch(no);
+        }
+        return null;
+    }
+
+    //删除节点
+    public void delNode(int no) {
+        if (null != root) {
+            //删除root节点
+            if (root.no == no) {
+                root = null;
+                return;
+            }
+            this.root.delNode(no);
         }
     }
 
@@ -120,6 +164,82 @@ class HeroNode {
         }
         //输出父节点
         System.out.println(this);
+    }
+
+    //前序查找
+    public HeroNode preSearch(int no) {
+        if (this.no == no) {
+            return this;
+        }
+        //此处是为了防止left中没找到直接返回空值
+        HeroNode result = null;
+        if (null != this.left) {
+            result = this.left.preSearch(no);
+        }
+        if (null != result) {
+            return result;
+        }
+        if (null != this.right) {
+            result = this.right.preSearch(no);
+        }
+        return result;
+    }
+
+    //中序查找
+    public HeroNode infixSearch(int no) {
+        HeroNode result = null;
+        if (null != this.left) {
+            result = this.left.infixSearch(no);
+        }
+        if (null != result) {
+            return result;
+        }
+        if (this.no == no) {
+            return this;
+        }
+        if (null != this.right) {
+            result = this.right.infixSearch(no);
+        }
+        return result;
+    }
+
+    //后序查找
+    public HeroNode postSearch(int no) {
+        HeroNode result = null;
+        if (null != this.left) {
+            result = this.left.postSearch(no);
+        }
+        if (null != result) {
+            return result;
+        }
+        if (null != this.right) {
+            result = this.right.postSearch(no);
+        }
+        if (null != result) {
+            return result;
+        }
+        if (this.no == no) {
+            return this;
+        }
+        return null;
+    }
+
+    //删除节点
+    public void delNode(int no) {
+        if (null != this.left && this.left.no == no) {
+            this.left = null;
+            return;
+        }
+        if (null != this.right && this.right.no == no) {
+            this.right = null;
+            return;
+        }
+        if (null != this.left) {
+            this.left.delNode(no);
+        }
+        if (null != this.right) {
+            this.right.delNode(no);
+        }
     }
 
 }
