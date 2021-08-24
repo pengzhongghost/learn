@@ -16,11 +16,11 @@ public class HeapSort {
          adjustHeap(arr,0,arr.length);
          System.out.println(Arrays.toString(arr));*/
         //第一次获得最大的值的大顶堆
-        ////非叶子节点交换
         for (int i = arr.length / 2 - 1; i >= 0; i--) {
             adjustHeap(arr, i, arr.length);
         }
         System.out.println(Arrays.toString(arr));
+        //此时根节点往下的都是大顶堆,所以下面只需要从上往下调整
         //数组逐渐变小
         for (int i = arr.length - 1; i > 0; i--) {
             int temp = arr[0];
