@@ -26,7 +26,7 @@ public class BinaryTreeDemo {
         System.out.println(tree.indixSearch(5));
         System.out.println(tree.postSearch(5));
         System.out.println("=========删除========");
-        tree.delNode(1);
+        tree.delNode(5);
         tree.preOrder();
     }
 }
@@ -91,7 +91,7 @@ class BinaryTree {
         return null;
     }
 
-    //删除节点
+    //删除节点，连子树一起删除
     public void delNode(int no) {
         if (null != root) {
             //删除root节点
@@ -224,7 +224,7 @@ class HeroNode {
         return null;
     }
 
-    //删除节点
+    //删除节点,删除整个子树
     public void delNode(int no) {
         if (null != this.left && this.left.no == no) {
             this.left = null;
