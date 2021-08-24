@@ -18,6 +18,9 @@ public class ThreadedBinaryTree {
         tree.threadedNodes();
         HeroNode leftNode = node05.left;
         System.out.println(leftNode);
+        System.out.println("========线索化遍历=========");
+        tree.list();
+
     }
 }
 
@@ -31,7 +34,7 @@ class BinaryTree {
         this.root = root;
     }
 
-    public void threadedNodes(){
+    public void threadedNodes() {
         threadedNodes(root);
     }
 
@@ -56,6 +59,22 @@ class BinaryTree {
         pre = node;
         threadedNodes(node.right);
 
+    }
+
+    //遍历线索化二叉树
+    public void list() {
+        HeroNode node = root;
+        while (null != node) {
+            while (node.leftType == 0) {
+                node = node.left;
+            }
+            System.out.println(node);
+            while (node.rightType == 1) {
+                node = node.right;
+                System.out.println(node);
+            }
+            node = node.right;
+        }
     }
 
 }
