@@ -51,6 +51,7 @@ public class HeapSort {
                 arr[i] = arr[j];
                 i = j;//此处i赋值他的子节点的值继续比较
             } else {
+                //此处敢break是因为只会比较此非叶子节点子树
                 break;
             }
         }

@@ -1,4 +1,4 @@
-package 树;
+package 树.顺序存储二叉树;
 
 public class ArrBinaryTreeDemo {
     public static void main(String[] args) {
