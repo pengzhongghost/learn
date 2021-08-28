@@ -12,12 +12,13 @@ public class HuffmanTree {
     }
 
     public static void preOrder(Node node){
-        if (null==node){
-            return;
-        }
         System.out.println(node);
-        preOrder(node.left);
-        preOrder(node.right);
+        if (null!=node.left){
+            preOrder(node.left);
+        }
+        if (null!=node.right){
+            preOrder(node.right);
+        }
     }
 
     public static Node createHuffmanTree(int[] arr) {
