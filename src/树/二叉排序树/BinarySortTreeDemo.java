@@ -7,8 +7,14 @@ public class BinarySortTreeDemo {
         for (int i : arr) {
             tree.add(new Node(i));
         }
+        tree.deleteNode(1);
+        tree.deleteNode(3);
+        tree.deleteNode(5);
         tree.deleteNode(7);
-        tree.infixOrder();
+        tree.deleteNode(9);
+        tree.deleteNode(10);
+        tree.deleteNode(12);
+        //tree.infixOrder();
     }
 }
 
@@ -62,6 +68,7 @@ class BinarySortTree {
         //说明删除的就是root节点
         if (root.left == null && root.right == null) {
             root = null;
+            return;
         }
         //找到父节点
         Node parent = searchParent(value);
@@ -81,16 +88,24 @@ class BinarySortTree {
         } else {
             //删除有一颗子树的节点
             if (targetNode.left == null) {
-                if (parent.left != null && parent.left.value == value) {
-                    parent.left = targetNode.right;
-                } else if (parent.right != null && parent.right.value == value) {
-                    parent.right = targetNode.right;
+                if (parent != null) {
+                    if (parent.left.value == value) {
+                        parent.left = targetNode.right;
+                    } else {
+                        parent.right = targetNode.right;
+                    }
+                } else {
+                    root = targetNode.right;
                 }
             } else if (targetNode.right == null) {
-                if (parent.left != null && parent.left.value == value) {
-                    parent.left = targetNode.left;
-                } else if (parent.right != null && parent.right.value == value) {
-                    parent.right = targetNode.left;
+                if (parent != null) {
+                    if (parent.left.value == value) {
+                        parent.left = targetNode.left;
+                    } else {
+                        parent.right = targetNode.left;
+                    }
+                } else {
+                    root = targetNode.left;
                 }
             }
         }
