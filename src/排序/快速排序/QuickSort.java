@@ -41,6 +41,7 @@ public class QuickSort {
             temp = arr[l];
             arr[l] = arr[r];
             arr[r] = temp;
+            //此处理是为了让这个值放在无限接近于pivot的位置
             //如果交换完后，发现这个arr[l]==pivot， r--，前移
             if (arr[l] == pivot) {
                 r -= 1;
