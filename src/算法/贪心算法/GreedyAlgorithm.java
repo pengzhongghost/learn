@@ -4,6 +4,15 @@ import java.util.*;
 
 /**
  * 贪心算法：
+ * 假设存在如下表的需要付费的广播台，以及广播台信号可以覆盖的地区，
+ * 如何选择最少的广播台，让所有的地区都可以接收到信号
+ *
+ * k1:北京，上海，天津
+ * k2:广州，北京，深圳
+ * k3:成都，上海，杭州
+ * k4:上海，天津
+ * k5:杭州，大连
+ *
  */
 public class GreedyAlgorithm {
     public static void main(String[] args) {
