@@ -1,6 +1,5 @@
 package leetcode题目.二叉树;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +14,8 @@ public class 不同的二叉树 {
         不同的二叉树 temp = new 不同的二叉树();
         List<TreeNode> treeNodes = temp.generateTrees(3);
         for (TreeNode treeNode : treeNodes) {
-            System.out.println(treeNode);
+            treeNode.preList();
+            System.out.println();
         }
     }
 
@@ -28,8 +28,8 @@ public class 不同的二叉树 {
     }
 
     public List<TreeNode> generateTrees(int start, int end) {
-        List<TreeNode> result = new ArrayList<>();
-        if (start >= end) {
+        List<TreeNode> result = new LinkedList<>();
+        if (start > end) {
             result.add(null);
             return result;
         }
@@ -38,9 +38,9 @@ public class 不同的二叉树 {
             List<TreeNode> leftList = generateTrees(start, i - 1);
             //生成右子树
             List<TreeNode> rightList = generateTrees(i + 1, end);
-            TreeNode treeNode = new TreeNode(i);
             for (TreeNode left : leftList) {
                 for (TreeNode right : rightList) {
+                    TreeNode treeNode = new TreeNode(i);
                     treeNode.left = left;
                     treeNode.right = right;
                     result.add(treeNode);
@@ -57,6 +57,16 @@ public class 不同的二叉树 {
 
         public TreeNode(int val) {
             this.val = val;
+        }
+
+        public void preList(){
+            System.out.println(this);
+            if (this.left!=null){
+                this.left.preList();
+            }
+            if (this.right!=null){
+                this.right.preList();
+            }
         }
 
         @Override
