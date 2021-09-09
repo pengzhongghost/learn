@@ -12,7 +12,11 @@ public class 不同的二叉树 {
      * @param args
      */
     public static void main(String[] args) {
-
+        不同的二叉树 temp = new 不同的二叉树();
+        List<TreeNode> treeNodes = temp.generateTrees(3);
+        for (TreeNode treeNode : treeNodes) {
+            System.out.println(treeNode);
+        }
     }
 
     public List<TreeNode> generateTrees(int n) {
@@ -25,11 +29,15 @@ public class 不同的二叉树 {
 
     public List<TreeNode> generateTrees(int start, int end) {
         List<TreeNode> result = new ArrayList<>();
-        for (int i = 1; i <= end; i++) {
+        if (start >= end) {
+            result.add(null);
+            return result;
+        }
+        for (int i = start; i <= end; i++) {
             //生成左子树
-            List<TreeNode> leftList = generateTrees(start, end - 1);
+            List<TreeNode> leftList = generateTrees(start, i - 1);
             //生成右子树
-            List<TreeNode> rightList = generateTrees(start + 1, end);
+            List<TreeNode> rightList = generateTrees(i + 1, end);
             TreeNode treeNode = new TreeNode(i);
             for (TreeNode left : leftList) {
                 for (TreeNode right : rightList) {
@@ -49,6 +57,13 @@ public class 不同的二叉树 {
 
         public TreeNode(int val) {
             this.val = val;
+        }
+
+        @Override
+        public String toString() {
+            return "TreeNode{" +
+                    "val=" + val +
+                    '}';
         }
     }
 
