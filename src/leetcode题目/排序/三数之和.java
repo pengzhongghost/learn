@@ -6,6 +6,9 @@ import java.util.List;
 
 public class 三数之和 {
 
+    /**
+     * 求出三数之和是0的数组
+     */
     public static void main(String[] args) {
         int[] nums = {-1, 0, 1, 2, -1, -4};
         nums = new int[]{0, 0, 0};
