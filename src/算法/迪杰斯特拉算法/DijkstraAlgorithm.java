@@ -4,6 +4,9 @@ import java.util.Arrays;
 
 public class DijkstraAlgorithm {
 
+    /**
+     * 求的是G村庄到其他村庄到最短距离
+     */
     public static void main(String[] args) {
         char[] vertex = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
         //表示不可连接
