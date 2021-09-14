@@ -96,12 +96,14 @@ public class HorseChessBoard {
 
     //对point对下一个对位置最少对进行排序
     public static void sort(List<Point> points) {
+        //调用此方法10ms
         points.sort(new Comparator<Point>() {
             @Override
             public int compare(Point o1, Point o2) {
                 return next(o1).size() - next(o2).size();
             }
         });
+        //调用此方法140ms
         //points.sort(Comparator.comparingInt(o->next(o).size()));
     }
 
