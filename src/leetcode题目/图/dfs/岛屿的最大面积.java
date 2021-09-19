@@ -1,4 +1,4 @@
-package leetcode题目.图;
+package leetcode题目.图.dfs;
 
 public class 岛屿的最大面积 {
     /**

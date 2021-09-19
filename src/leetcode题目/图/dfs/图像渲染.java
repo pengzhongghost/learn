@@ -1,4 +1,4 @@
-package leetcode题目.图;
+package leetcode题目.图.dfs;
 
 import java.util.Arrays;
 
