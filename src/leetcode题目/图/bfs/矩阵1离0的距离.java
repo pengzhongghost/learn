@@ -1,4 +1,4 @@
-package leetcode题目.图.dfs;
+package leetcode题目.图.bfs;
 
 import java.util.Arrays;
 
@@ -17,6 +17,18 @@ public class 矩阵1离0的距离 {
                 {0, 1, 0},
                 {1, 1, 1}
         };
+        mat = new int[][]{
+                {1, 1, 0, 0, 1, 0, 0, 1, 1, 0},
+                {1, 0, 0, 1, 0, 1, 1, 1, 1, 1},
+                {1, 1, 1, 0, 0, 1, 1, 1, 1, 0},
+                {0, 1, 1, 1, 0, 1, 1, 1, 1, 1},
+                {0, 0, 1, 1, 1, 1, 1, 1, 1, 0},
+                {1, 1, 1, 1, 1, 1, 0, 1, 1, 1},
+                {0, 1, 1, 1, 1, 1, 1, 0, 0, 1},
+                {1, 1, 1, 1, 1, 0, 0, 1, 1, 1},
+                {0, 1, 0, 1, 1, 0, 1, 1, 1, 1},
+                {1, 1, 1, 0, 1, 0, 1, 1, 1, 1}
+        };
         mat = updateMatrix(mat);
         for (int[] ints : mat) {
             System.out.println(Arrays.toString(ints));
@@ -31,7 +43,8 @@ public class 矩阵1离0的距离 {
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (mat[i][j] == 1) {
-                    res[i][j] = Integer.MAX_VALUE;
+                    //integer的最大数+1为负数
+                    res[i][j] = Integer.MAX_VALUE / 2;
                 }
             }
         }
@@ -49,6 +62,7 @@ public class 矩阵1离0的距离 {
             }
         }
         // 只有 水平向右移动 和 竖直向下移动
+        //此处反过来遍历是为了防止第一个数附近的数可能还是初始化的integer.max/2
         for (int i = m - 1; i >= 0; --i) {
             for (int j = n - 1; j >= 0; --j) {
                 if (res[i][j] > 0) {
