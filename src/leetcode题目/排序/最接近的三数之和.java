@@ -17,7 +17,38 @@ public class 最接近的三数之和 {
         System.out.println(threeSumClosest(nums, target));
     }
 
+    //三指针法
     public static int threeSumClosest(int[] nums, int target) {
+        if (nums.length == 0) {
+            throw new RuntimeException("数组为空");
+        }
+        Arrays.sort(nums);
+        int minResult = Integer.MAX_VALUE / 2;
+        for (int first = 0; first < nums.length; first++) {
+            int third = nums.length - 1;
+            int second = first + 1;
+            //此处之所以用while是因为要控制third和second不是同时加减
+            while (second < third) {
+                int sum = nums[first] + nums[second] + nums[third];
+                if (sum == target) {
+                    return target;
+                }
+                if (Math.abs(sum - target) < Math.abs(minResult - target)) {
+                    minResult = sum;
+                }
+                //sum>target
+                if (sum > target) {
+                    third--;
+                } else {
+                    second++;
+                }
+            }
+        }
+        return minResult;
+    }
+
+    //粗暴枚举法
+    public static int threeSumClosest01(int[] nums, int target) {
         if (nums.length == 0) {
             throw new RuntimeException("数组为空");
         }
