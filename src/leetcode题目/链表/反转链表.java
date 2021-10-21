@@ -3,6 +3,9 @@ package leetcode题目.链表;
 import java.util.Stack;
 
 public class 反转链表 {
+    /**
+     * 给你单链表的头节点 head ，请你反转链表，并返回反转后的链表。
+     */
     public static void main(String[] args) {
         ListNode l1 = new ListNode(1);
         l1.next = new ListNode(2);
