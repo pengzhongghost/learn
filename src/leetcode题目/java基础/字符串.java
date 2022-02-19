@@ -1,5 +1,7 @@
 package leetcode题目.java基础;
 
+import sun.misc.Version;
+
 public class 字符串 {
     /**
      * 字符串拼接操作：
@@ -9,7 +11,7 @@ public class 字符串 {
      * 4.如果拼接的结果是调用的intern（）方法，则主动将常量池中还没有的字符串对象放入池中，并返回此对象地址。
      */
     public static void main(String[] args) {
-        test03();
+        test04();
     }
 
     //todo 常量与常量拼接结果在常量池中
@@ -56,6 +58,19 @@ public class 字符串 {
         s3.intern();//在字符串常量池中生成ab,jdk6中创建了一个新的对象，也就有新的地址
         String s4 = "ab";//使用的是上一行代码中生成的常量池中的ab的地址
         System.out.println(s3 == s4);//jdk1.6 false jdk1.7/8 true
+    }
+
+    public static void test04() {
+        String str01 = new StringBuilder().append("58").append("tongcheng").toString();
+        System.out.println(str01);
+        System.out.println(str01.intern());
+        System.out.println(str01 == str01.intern());//true
+        System.out.println();
+        //todo sun.misc.Version中自带了一个java，类加载的时候字符串常量池中就已经有了一个Java
+        String str02 = new StringBuilder().append("ja").append("va").toString();
+        System.out.println(str02);
+        System.out.println(str02.intern());
+        System.out.println(str02 == str02.intern());//false
     }
 
 }
