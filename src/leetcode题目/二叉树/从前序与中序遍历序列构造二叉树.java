@@ -1,34 +1,59 @@
 package leetcode题目.二叉树;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class 从前序与中序遍历序列构造二叉树 {
     /**
      * 从前序与中序遍历序列构造二叉树
      * 给定两个整数数组 preorder 和 inorder ，其中 preorder 是二叉树的先序遍历，
      * inorder 是同一棵树的中序遍历，请构造二叉树并返回其根节点。
-     *
+     * <p>
      * 示例 1:
      * 输入: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]
      * 输出: [3,9,20,null,null,15,7]
-     *
+     * <p>
      * 示例 2:
      * 输入: preorder = [-1], inorder = [-1]
      * 输出: [-1]
-     *
+     * <p>
      * 来源：力扣（LeetCode）
      * 链接：https://leetcode-cn.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal
      * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
      */
     public static void main(String[] args) {
         int[] preorder = {3, 9, 20, 15, 7};
-        preorder = new int[] {1, 2, 3};
+        preorder = new int[]{1, 2, 3};
         //preorder = new int[] {1, 2, 4, 5, 3, 6, 7};
         int[] inorder = {9, 3, 15, 20, 7};
-        inorder = new int[] {3, 2, 1};
+        inorder = new int[]{3, 2, 1};
         //inorder = new int[] {4, 2, 5, 1, 6, 3, 7};
         TreeNode treeNode = buildTree(preorder, inorder);
         preList(treeNode);
+    }
+
+    public static TreeNode buildTree(int[] preorder, int[] inorder) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < inorder.length; i++) {
+            map.put(inorder[i], i);
+        }
+        return buildTree(preorder, 0, preorder.length - 1, map);
+    }
+
+    static int rootIndex = 0;
+
+    public static TreeNode buildTree(int[] preorder, int left, int right, Map<Integer, Integer> map) {
+        if (left > right) {
+            return null;
+        }
+        //此处需要一个新的变量，rootindex会自增
+        int rootVal = preorder[rootIndex];
+        TreeNode root = new TreeNode(rootVal);
+        rootIndex++;
+        root.left = buildTree(preorder, left, map.get(rootVal) - 1, map);
+        root.right = buildTree(preorder, map.get(rootVal) + 1, right, map);
+        return root;
     }
 
     public static void preList(TreeNode treeNode) {
@@ -41,7 +66,7 @@ public class 从前序与中序遍历序列构造二叉树 {
         }
     }
 
-    public static TreeNode buildTree(int[] preorder, int[] inorder) {
+    public static TreeNode buildTree02(int[] preorder, int[] inorder) {
         if (preorder.length == 0 || inorder.length == 0) {
             return null;
         }
@@ -66,13 +91,16 @@ public class 从前序与中序遍历序列构造二叉树 {
     }
 
     static class TreeNode {
-        int      val;
+        int val;
         TreeNode left;
         TreeNode right;
 
-        TreeNode() {}
+        TreeNode() {
+        }
 
-        TreeNode(int val) { this.val = val; }
+        TreeNode(int val) {
+            this.val = val;
+        }
 
         TreeNode(int val, TreeNode left, TreeNode right) {
             this.val = val;
