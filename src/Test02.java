@@ -1,38 +1,70 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Test02 {
-    /**
-     * 给你一个整数数组 nums ，其中可能包含重复元素，请你返回该数组所有可能的子集（幂集）。
-     * 解集 不能 包含重复的子集。返回的解集中，子集可以按 任意顺序 排列。
-     * <p>
-     * 示例 1：
-     * 输入：nums = [1,2,2]
-     * 输出：[[],[1],[1,2],[1,2,2],[2],[2,2]]
-     * <p>
-     * 示例 2：
-     * 输入：nums = [0]
-     * 输出：[[],[0]]
-     */
+
     public static void main(String[] args) {
-        int[] nums = {1, 2, 2};
-        //nums = new int[]{0};
-        System.out.println(subsets(nums));
+
     }
 
-    public static List<List<Integer>> subsets(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        Arrays.sort(nums);
-        dfs(nums, 0, result, new ArrayList<>());
-        return result;
+
+    public static List<Integer> findAnagrams(String s, String p) {
+        List<Integer> res = new ArrayList<>();
+        int[] ant = new int[26];
+        for (int i = 0; i < p.length(); i++) {
+            ant[p.charAt(i) - 'a']++;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            ant[p.charAt(i) - 'a']--;
+            if (check(ant)) {
+                res.add();
+            }
+        }
     }
 
-    public static void dfs(int[] nums, int index, List<List<Integer>> result, List<Integer> res) {
-        result.add(new ArrayList<>(res));
-        for (int i = index; i < nums.length; i++) {
-            if (i != index && nums[i] == nums[i - 1]) continue;
-            res.add(nums[i]);
-            dfs(nums, i + 1, result, res);
-            res.remove(res.size() - 1);
+    public static void dfs(int[] ant,List<Integer> res){
+
+    }
+
+    private static boolean check(int[] ant) {
+
+    }
+
+    static public class ListNode {
+        int val;
+        ListNode next;
+
+        ListNode() {
+        }
+
+        ListNode(int val) {
+            this.val = val;
+        }
+
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
         }
     }
 
