@@ -31,7 +31,7 @@ public class 验证二叉搜索树 {
         System.out.println(isValidBST(root));
     }
 
-    public static long record= Integer.MIN_VALUE;
+    public static long record= Long.MIN_VALUE;
 
     //中序遍历，让record从小变大
     public static boolean isValidBST(TreeNode root) {
