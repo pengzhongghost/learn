@@ -20,12 +20,33 @@ public class 目标和 {
      * +1 + 1 + 1 + 1 - 1 = 3
      */
     public static void main(String[] args) {
-        int[] nums = {1, 2};
-        int res = findTargetSumWays(nums, 2);
+        int[] nums = {1,1,1,1,1};
+        nums = new int[]{1,2,3,4,5};
+        int res = findTargetSumWays(nums, 3);
         System.out.println(res);
     }
 
     public static int findTargetSumWays(int[] nums, int target) {
+        int sum = 0;
+        for (int num : nums) {
+            sum += num;
+        }
+        int diff = sum - target;
+        if (diff < 0 || diff % 2 != 0) {
+            return 0;
+        }
+        int neg = diff / 2;
+        int[] dp = new int[neg + 1];
+        dp[0] = 1;
+        for (int num : nums) {
+            for (int j = neg; j >= num; j--) {
+                dp[j] += dp[j - num];
+            }
+        }
+        return dp[neg];
+    }
+
+    public static int findTargetSumWays02(int[] nums, int target) {
         int sum = 0;
         for (int num : nums) {
             sum += num;
