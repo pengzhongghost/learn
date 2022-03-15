@@ -22,6 +22,28 @@ public class 路径总和III {
         System.out.println(pathSum);
     }
 
+    public static int pathSum02(TreeNode root, int targetSum) {
+        if (root == null) {
+            return 0;
+        }
+        dfs(root,targetSum);
+        pathSum(root.left, targetSum);
+        pathSum(root.right,targetSum);
+        return result;
+    }
+
+    public static void dfs02(TreeNode root, int targetSum) {
+        if (root == null) {
+            return;
+        }
+        if (targetSum == root.val) {
+            result++;
+        }
+        targetSum-=root.val;
+        dfs(root.left, targetSum);
+        dfs(root.right, targetSum);
+    }
+
     static int result = 0;
 
     public static int pathSum(TreeNode root, int targetSum) {
