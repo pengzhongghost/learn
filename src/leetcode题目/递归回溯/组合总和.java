@@ -30,8 +30,28 @@ public class 组合总和 {
      */
     public static void main(String[] args) {
         int[] nums = {2, 3, 5};
-        List<List<Integer>> result = combinationSum(nums, 8);
+        List<List<Integer>> result = combinationSum02(nums, 8);
         System.out.println(result);
+    }
+
+    private static List<List<Integer>> combinationSum02(int[] nums, int target) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfs02(nums, 0, target, result, new ArrayList<>());
+        return result;
+    }
+
+    public static void dfs02(int[] nums, int index, int target, List<List<Integer>> result, List<Integer> res) {
+        if (target == 0) {
+            result.add(new ArrayList<>(res));
+            return;
+        }
+        for (int i = index; i < nums.length; i++) {
+            if (target - nums[i] >= 0) {
+                res.add(nums[i]);
+                dfs02(nums, i, target - nums[i], result, res);
+                res.remove(res.size() - 1);
+            }
+        }
     }
 
     public static List<List<Integer>> combinationSum(int[] candidates, int target) {
