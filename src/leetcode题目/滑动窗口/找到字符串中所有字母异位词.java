@@ -26,6 +26,40 @@ public class 找到字符串中所有字母异位词 {
     }
 
     //todo 滑动窗口
+    public static List<Integer> findAnagrams02(String s, String p) {
+        List<Integer>  res= new ArrayList<>();
+        if (p.length() > s.length()) {
+            return res;
+        }
+        int[] ant = new int[26];
+        int first = 0, second = 0;
+        for (int i = 0; i < p.length(); i++) {
+            ant[p.charAt(i) - 'a']++;
+            ant[s.charAt(first++) - 'a']--;
+        }
+        if (check(ant)) {
+            res.add(second);
+        }
+        while (first < s.length()) {
+            ant[s.charAt(second++) - 'a']++;
+            ant[s.charAt(first++) - 'a']--;
+            if (check(ant)) {
+                res.add(second);
+            }
+        }
+        return res;
+    }
+
+    public static boolean check(int[] ant) {
+        for (int i = 0; i < ant.length; i++) {
+            if (ant[i] > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    //todo 滑动窗口
     public static List<Integer> findAnagrams(String s, String p) {
         List<Integer> res = new ArrayList<>();
         if (p.length() > s.length()) {
