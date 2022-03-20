@@ -46,6 +46,21 @@ public class 图像渲染 {
     private final static int[] col = {0, 1, -1, 0};
 
 
+    public static int[][] floodFill02(int[][] image, int sr, int sc, int newColor) {
+        int oldColor = image[sr][sc];
+        dfs02(image, oldColor, sr, sc, newColor);
+        return image;
+    }
+
+    public static void dfs02(int[][] image, int oldColor, int sr, int sc, int newColor) {
+        if (sr < 0 || sc < 0 || sr >= image.length || sc >= image[0].length || image[sr][sc] != oldColor) return;
+        image[sr][sc] = newColor;
+        dfs02(image, oldColor, sr + 1, sc, newColor);
+        dfs02(image, oldColor, sr, sc + 1, newColor);
+        dfs02(image, oldColor, sr - 1, sc, newColor);
+        dfs02(image, oldColor, sr, sc - 1, newColor);
+    }
+
     //深度优先遍历
     public static int[][] floodFill(int[][] image, int sr, int sc, int newColor) {
         //首先记录当前点的颜色，之后需要改颜色
