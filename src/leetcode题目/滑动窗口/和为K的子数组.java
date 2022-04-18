@@ -1,4 +1,4 @@
-package leetcode题目.java基础;
+package leetcode题目.滑动窗口;
 
 import java.util.HashMap;
 import java.util.Map;
