@@ -1,4 +1,4 @@
-package leetcode题目.二叉树;
+package leetcode题目.前缀树;
 
 import java.util.HashMap;
 import java.util.Map;
