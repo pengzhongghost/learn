@@ -11,19 +11,16 @@ public class 不用加减乘除做加法 {
      * 输出: 2
      */
     public static void main(String[] args) {
-
+        System.out.println(add(2, 3));
     }
 
-    public String addBinary(String a, String b) {
-        StringBuilder result = new StringBuilder();
-        int i = a.length() - 1, j = b.length() - 1, c = 0;
-        while (i >= 0 || j >= 0 || c != 0) {
-            int m = i >= 0 ? a.charAt(i--) - '0' : 0;
-            int n = j >= 0 ? b.charAt(j--) - '0' : 0;
-            c = m + n + c;
-            result.append(c % 2);
-            c /= 2;
+    public static int add(int a, int b) {
+        if (a == 0 || b == 0) {
+            return a ^ b;
         }
-        return result.reverse().toString();
+        //10^11=01
+        //10&11=10   10<<1 100 都是1则进1
+        return add(a ^ b, (a & b) << 1);
     }
+
 }
