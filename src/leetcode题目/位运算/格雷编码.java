@@ -1,7 +1,9 @@
-import java.util.*;
+package leetcode题目.位运算;
 
-public class Test extends Base {
+import java.util.ArrayList;
+import java.util.List;
 
+public class 格雷编码 {
     /**
      * 格雷编码
      * n 位格雷码序列 是一个由 2n 个整数组成的序列，其中：
@@ -49,5 +51,4 @@ public class Test extends Base {
             ret.add(i ^ i >> 1);
         return ret;
     }
-
 }
