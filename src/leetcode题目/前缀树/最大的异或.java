@@ -53,6 +53,7 @@ public class 最大的异或 {
             Trie.Node temp = root;
             for (int i = 31; i >= 0; i--) {
                 int index = (num >> i) & 1;
+                //todo 找和我这个数的bit位不同异或才最大
                 int f = index == 0 ? 1 : 0;
                 if (temp.children[f] == null) {
                     temp = temp.children[index];
