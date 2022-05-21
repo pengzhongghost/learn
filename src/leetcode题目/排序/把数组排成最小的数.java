@@ -1,4 +1,4 @@
-package leetcode题目.java基础;
+package leetcode题目.排序;
 
 import java.util.Arrays;
 
