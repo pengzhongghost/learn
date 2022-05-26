@@ -23,6 +23,9 @@ public class 二叉树最底层最左边的值 {
         root.right.right = new TreeNode(6);
         root.right.left = new TreeNode(5);
         root.right.left.left = new TreeNode(7);
+//        TreeNode root = new TreeNode(2);
+//        root.left = new TreeNode(1);
+//        root.right = new TreeNode(3);
         //TreeNode root = new TreeNode(1);
         System.out.println(findBottomLeftValue(root));
     }
@@ -38,12 +41,12 @@ public class 二叉树最底层最左边的值 {
 
     private static void dfs(TreeNode root, int k) {
         if (null == root) return;
+        dfs(root.left, k + 1);
         if (k > floor) {
             res = root.val;
             floor = k;
         }
         dfs(root.right, k + 1);
-        dfs(root.left, k + 1);
     }
 
     static class TreeNode {
