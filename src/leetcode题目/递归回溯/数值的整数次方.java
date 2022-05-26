@@ -30,7 +30,14 @@ public class 数值的整数次方 {
         if (n == 0) {
             return 1;
         }
-        double y = dfs(x, n / 2);
-        return n % 2 == 0 ? y * y : y * y * x;
+        return x * dfs(x, n - 1);
     }
+
+//    public static double dfs(double x, long n) {
+//        if (n == 0) {
+//            return 1;
+//        }
+//        double y = dfs(x, n / 2);
+//        return n % 2 == 0 ? y * y : y * y * x;
+//    }
 }
