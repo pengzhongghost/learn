@@ -21,6 +21,28 @@ public class 最长回文子串 {
         System.out.println(res);
     }
 
+    public static int longestPalindrome02(String line) {
+        int maxLen = 0;
+        for (int i = 0; i < line.length() - 1; i++) {
+            for (int j = line.length() - 1; j > i; j--) {
+                if (isPalindrome(line, i, j)) {
+                    maxLen = Math.max(maxLen, j - i + 1);
+                }
+            }
+        }
+        return maxLen;
+    }
+
+    public static boolean isPalindrome(String str, int i, int j) {
+        if (str.charAt(i) != str.charAt(j)) {
+            return false;
+        }
+        if (j - i < 3) {
+            return true;
+        }
+        return isPalindrome(str, i + 1, j - 1);
+    }
+
     public static String longestPalindrome(String s) {
         int len = s.length();
         if (len < 2) {
