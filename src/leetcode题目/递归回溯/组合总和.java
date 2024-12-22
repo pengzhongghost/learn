@@ -6,6 +6,7 @@ import java.util.List;
 public class 组合总和 {
 
     /**
+     * https://leetcode.cn/problems/Ygoe9J/description/
      * 给你一个 无重复元素 的整数数组candidates 和一个目标整数target，
      * 找出candidates中可以使数字和为目标数target 的 所有不同组合 ，
      * 并以列表形式返回。你可以按 任意顺序 返回这些组合。
