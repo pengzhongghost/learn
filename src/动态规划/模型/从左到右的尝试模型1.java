@@ -1,4 +1,4 @@
-package 动态规划.从左往右尝试模型;
+package 动态规划.模型;
 
 import java.util.ArrayList;
 import java.util.HashSet;
