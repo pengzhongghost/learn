@@ -44,6 +44,7 @@ public class 范围上尝试的模型 {
      * 后手拿牌，只能拿到别人不要的分数，A选择的Math.max，则B只能选择小的
      */
     private static int latter(int[] arr, int left, int right) {
+        //已经没牌拿了
         if (left == right) {
             return 0;
         }
@@ -51,5 +52,39 @@ public class 范围上尝试的模型 {
         return Math.min(former(arr, left + 1, right),
                 former(arr, left, right - 1));
     }
+
+    /**
+     * dp方式
+     */
+    public static int dpWay(int[] arr) {
+        if (null == arr || arr.length == 0) {
+            return 0;
+        }
+        int[][] former = new int[arr.length][arr.length];
+        int[][] latter = new int[arr.length][arr.length];
+        for (int i = 0; i < arr.length; i++) {
+            //left == right的情况
+            former[i][i] = arr[i];
+            latter[i][i] = 0;
+        }
+        //  \这样的对角线一个一个往右上角填充
+        for (int i = 1; i < arr.length; i++) {
+            int left = 0;
+            int right = i;
+            while (left < arr.length && right < arr.length) {
+                former[left][right] = Math.max(
+                        arr[left] + latter[left + 1][right],
+                        arr[right] + latter[left][right - 1]);
+                latter[left][right] = Math.min(
+                        former[left + 1][right],
+                        former[left][right + 1]
+                );
+                left++;
+                right++;
+            }
+        }
+        return Math.max(former[0][arr.length - 1], latter[0][arr.length - 1]);
+    }
+
 
 }
