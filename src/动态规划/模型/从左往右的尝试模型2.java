@@ -52,7 +52,7 @@ public class 从左往右的尝试模型2 {
     }
 
     private static int dfs03(int[] weight, int[] value, int index, int restWeight){
-        if (restWeight <= 0 || index >= weight.length) {
+        if (index >= weight.length) {
             return 0;
         }
         int p1 = dfs03(weight, value, index + 1, restWeight);
@@ -61,6 +61,23 @@ public class 从左往右的尝试模型2 {
             p2 = value[index] + dfs03(weight, value, index + 1, restWeight - weight[index]);
         }
         return Math.max(p1, p2);
+    }
+
+    //dp根据dfs03改的
+    public static int dpWay(int[] weight, int[] value, int bag) {
+        int[][] dp = new int[weight.length + 1][bag + 1];
+        //dp[weight.length + 1][...] = 0
+        for (int index = weight.length; index >= 0 ; index--) {
+            for (int restWeight = 0; restWeight <= bag; restWeight++) {
+                int p1 = dp[index + 1][restWeight];
+                int p2 = 0;
+                if (restWeight >= weight[index]) {
+                    p2 = value[index] + dp[index + 1][restWeight - weight[index]];
+                }
+                dp[index][restWeight] = Math.max(p1, p2);
+            }
+        }
+        return dp[0][bag];
     }
 
 }
