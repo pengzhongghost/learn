@@ -30,6 +30,7 @@ public class 公平分发饼干 {
             dfs(cookies, count, k, index + 1, Math.max(max, count[i]));
             count[i] -= cookies[index];
             //剪枝，如果回溯之后变成0，下一次就要放其它空的地方，其实效果是一样的，因为每个人都是等价的
+            //一个小朋友没有分到饼干，则下一个分到了再做比较没什么意义
             if (count[i] == 0) {
                 break;
             }
