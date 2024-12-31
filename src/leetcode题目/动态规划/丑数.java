@@ -35,6 +35,6 @@ public class 丑数 {
                 p5++;
             }
         }
-        return dp[5];
+        return dp[n];
     }
 }

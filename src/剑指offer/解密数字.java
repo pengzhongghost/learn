@@ -37,4 +37,66 @@ public class 解密数字 {
         return dp[str.length()];
     }
 
+    /**
+     * dfs版本
+     */
+    public int crackNumber02(int ciphertext) {
+        return dfs(ciphertext + "", 0);
+    }
+
+    private int dfs(String ciphertext, int index) {
+        if(index == ciphertext.length()) {
+            return 1;
+        }
+        if(index > ciphertext.length()) {
+            return 0;
+        }
+        char c = ciphertext.charAt(index);
+        if('1' == c) {
+            int res = dfs(ciphertext, index + 1);
+            res += dfs(ciphertext, index + 2);
+            return res;
+        }
+        if('2' == c) {
+            int res = dfs(ciphertext, index + 1);
+            if(index + 2 <= ciphertext.length()
+                    && ciphertext.charAt(index + 1) >= '0'
+                    && ciphertext.charAt(index + 1) <= '5') {
+                res += dfs(ciphertext, index + 2);
+            }
+            return res;
+        }
+        return dfs(ciphertext, index + 1);
+    }
+
+    /**
+     * 改造成动态规划版本
+     */
+    public int crackNumber03(int ciphertext) {
+        String word = ciphertext + "";
+        int[] dp = new int[word.length() + 1];
+        dp[word.length()] = 1;
+        for (int i = word.length() - 1 ; i >= 0; i--) {
+            char c = word.charAt(i);
+            if ('1' == c) {
+                int ans = dp[i + 1];
+                if (i < word.length() - 1) {
+                    ans += dp[i + 2];
+                }
+                dp[i] = ans;
+            } else if ('2' == c) {
+                int ans = dp[i + 1];
+                if (i < word.length() - 1 && word.charAt(i + 1) >= '0'
+                        && word.charAt(i + 1) <= '5') {
+                    ans += dp[i + 2];
+                }
+                dp[i] = ans;
+            } else {
+                dp[i] = dp[i + 1];
+            }
+        }
+        return dp[0];
+    }
+
+
 }
