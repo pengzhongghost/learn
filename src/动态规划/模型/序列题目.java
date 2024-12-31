@@ -1,6 +1,4 @@
-package 动态规划.从左往右尝试模型;
-
-import java.util.List;
+package 动态规划.模型;
 
 public class 序列题目 {
 
