@@ -1,6 +1,7 @@
 package 中级提升;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.PriorityQueue;
 
 public class 前k个相加大的数 {
@@ -23,7 +24,7 @@ public class 前k个相加大的数 {
         int[] result = new int[k];
         int index = 0;
         boolean[][] isVisited = new boolean[arr1.length][arr2.length];
-        PriorityQueue<Node> nodes = new PriorityQueue<>();
+        PriorityQueue<Node> nodes = new PriorityQueue<>(new MapHeapComp());
         nodes.add(new Node(arr1.length - 1, arr2.length - 1, arr1[arr1.length - 1] + arr2[arr2.length - 1]));
         isVisited[arr1.length - 1][arr2.length - 1] = true;
         while (index != k) {
@@ -60,6 +61,15 @@ public class 前k个相加大的数 {
         public int compareTo(Node o) {
             return this.sum = o.sum;
         }
+    }
+
+    static class MapHeapComp implements Comparator<Node> {
+
+        @Override
+        public int compare(Node o1, Node o2) {
+            return o1.sum - o2.sum;
+        }
+
     }
 
 }
